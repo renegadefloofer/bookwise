@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div class="container-fluid">
+    <h1>Here are the books recommended to <strong>carloodq</strong></h1>
+    <p>Favorite genres are <strong>Sci-fi</strong> and <strong>Biographies</strong></p>
+
+    <label for="inputPassword5" class="form-label">Suggest a book</label>
+    <input class="form-control" >
+    <button type="button" class="btn btn-primary">Suggest</button>
+
+
+    <h3>All books</h3>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Recommended by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Hitchhiker's Guide to the Galaxy</td>
+            <td>Douglas Adams</td>
+            <td>Vivek</td>
+          </tr>
+          <tr>
+            <td>Wings of Fire</td>
+            <td>Abdul Kalam</td>
+            <td>Marta</td>
+          </tr>
+        </tbody>
+      </table>
+    <button onclick="runapi()">test api</button>
+
+
+</div>
+
+
+<script>
+
+
+function runapi() {
+
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "genres": "[scifi, biography]",
+  "prompter": "carlo"
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://app.arsolutions.it/api/v1/prompt", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+}
+
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
