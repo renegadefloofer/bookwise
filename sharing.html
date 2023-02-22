@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>
+        How to use web share API for native 
+        share options in HTML and JavaScript?
+    </title>
+</head>
+  
+<body style="text-align: center;">
+
+    <h2>Web Share API Demonstration</h2>
+  
+    <button id="btn">Share</button>
+  
+    <script>
+const btn = document.getElementById("btn");
+
+// function for web share api
+function webShareAPI(header, description, link) {
+  navigator
+    .share({
+      title: header,
+      text: description,
+      url: link
+    })
+    .then(() => console.log("Successful share"))
+    .catch((error) => console.log("Error sharing", error));
+}
+  
+            // Fallback, Tries to use API only
+            // if navigator.share function is
+            // available
+            if (navigator.share) {
+              // Show button if it supports webShareAPI
+              btn.style.display = "block";
+              btn.addEventListener("click", () =>
+                webShareAPI("header", "description", "www.url.com")
+              );
+            } else {
+              // Hide button if it supports webShareAPI
+              btn.style.display = "none";
+              console.error("Your Browser doesn't support Web Share API");
+              document.write("Your Browser doesn't support Web Share API");
+            }
+
+
+    </script>
+</body>
+  
+</html>
